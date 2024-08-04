@@ -549,9 +549,12 @@ function renderListItems() {
     outputRow.classList.add("plan-row");
 
     const outputText = document.createElement("div");
-    outputText.textContent = randomPlans[i];
     outputText.classList.add("plan-row-text");
     outputText.dataset.uid = `${randomTodos[i].id}`;
+
+    const outputTextWrapper = document.createElement("span");
+    outputTextWrapper.textContent = randomPlans[i];
+    outputText.append(outputTextWrapper);
 
     const buttonsContainer = document.createElement("div");
     buttonsContainer.classList.add("buttons-container");
@@ -573,17 +576,23 @@ function renderListItems() {
     const checkMark = document.createElement("span");
     checkMark.classList.add("checkbox-mark");
 
-    const img = document.createElement("img");
-    img.src = "assets/icons/reload.svg";
-    img.classList.add("reload-button");
+    const reloadImg = document.createElement("img");
+    reloadImg.src = "assets/icons/reload.svg";
+    reloadImg.classList.add("reload-button");
+
+    const tapImg = document.createElement("img");
+    tapImg.src = "assets/icons/tap.svg";
+    tapImg.classList.add("tap-icon");
+
+    outputText.append(tapImg);
 
     if (randomTodos[i].updated) {
-      img.classList.add("button-disabled");
+      reloadImg.classList.add("button-disabled");
     }
 
-    img.addEventListener("click", () => {
-      if (!img.classList.contains("button-disabled")) {
-        img.classList.add("button-disabled");
+    reloadImg.addEventListener("click", () => {
+      if (!reloadImg.classList.contains("button-disabled")) {
+        reloadImg.classList.add("button-disabled");
 
         const rows = document.querySelectorAll(".plan-row-text");
         let rndValue = getRandomInt(0, plans.length - 1);
@@ -598,13 +607,13 @@ function renderListItems() {
         savePlanIds(); //HERE
         randomPlans[i] = plans[rndValue].message;
 
-        rows[i].textContent = randomPlans[i];
+        rows[i].childNodes[0].textContent = randomPlans[i];
         rows[i].dataset.uid = `${randomTodos[i].id}`;
       }
     });
 
     checkMarkLabel.append(checkInput, checkMark);
-    buttonsContainer.append(checkMarkLabel, img);
+    buttonsContainer.append(checkMarkLabel, reloadImg);
     outputRow.append(outputText, buttonsContainer);
     results.append(outputRow);
   }

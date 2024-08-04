@@ -211,9 +211,11 @@ footer {
 }
 
 .plan-row-text {
+  position: relative;
   flex: 10;
   background-color: #ebebeb;
   padding: 10px;
+  padding-right: 24px;
   border: solid black 2px;
   border-radius: 8px;
   color: black;
@@ -403,6 +405,17 @@ footer {
 
 .checkbox-input:hover + .checkbox-mark:hover {
   scale: 1.05;
+}
+
+.tap-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  padding: 0.1rem;
 }
 
 /* BREAKPOINTS */
