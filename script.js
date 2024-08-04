@@ -556,6 +556,23 @@ function renderListItems() {
     const buttonsContainer = document.createElement("div");
     buttonsContainer.classList.add("buttons-container");
 
+    const checkMarkLabel = document.createElement("label");
+    checkMarkLabel.classList.add("checkbox-container");
+    checkMarkLabel.innerHTML = "";
+
+    const checkInput = document.createElement("input");
+    checkInput.classList.add("checkbox-input");
+    checkInput.type = "checkbox";
+    checkInput.checked = randomTodos[i].checked;
+
+    checkInput.addEventListener("change", (e) => {
+      randomTodos[i].checked = e.currentTarget.checked;
+      savePlanIds();
+    });
+
+    const checkMark = document.createElement("span");
+    checkMark.classList.add("checkbox-mark");
+
     const img = document.createElement("img");
     img.src = "assets/icons/reload.svg";
     img.classList.add("reload-button");
@@ -577,6 +594,7 @@ function renderListItems() {
           }
         }
         randomTodos[i] = createTodoItem(rndValue, true);
+        checkInput.checked = false;
         savePlanIds(); //HERE
         randomPlans[i] = plans[rndValue].message;
 
@@ -584,24 +602,6 @@ function renderListItems() {
         rows[i].dataset.uid = `${randomTodos[i].id}`;
       }
     });
-
-    const checkMarkLabel = document.createElement("label");
-    checkMarkLabel.innerHTML = "";
-
-    const checkInput = document.createElement("input");
-    checkInput.classList.add("checkbox-input");
-    checkInput.type = "checkbox";
-    checkInput.checked = randomTodos[i].checked;
-
-    checkInput.addEventListener("change", (e) => {
-      randomTodos[i].checked = e.currentTarget.checked;
-      savePlanIds();
-    });
-
-    const checkMark = document.createElement("span");
-    checkMark.classList.add("checkbox-mark");
-
-    checkMarkLabel.classList.add("checkbox-container");
 
     checkMarkLabel.append(checkInput, checkMark);
     buttonsContainer.append(checkMarkLabel, img);
