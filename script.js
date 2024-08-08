@@ -376,7 +376,7 @@ function generateRandomIds(count = 4) {
 
     while (true) {
       rndValue = getRandomInt(0, plans.length - 1);
-      if (!newRandomArr.includes(rndValue)) {
+      if (!newRandomArr.some((item) => item.id === rndValue)) {
         break;
       }
     }
