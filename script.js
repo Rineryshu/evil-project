@@ -312,8 +312,6 @@ if (savedIds !== null) {
   renderListItems();
 } else {
   showPage(PAGE_CODES.start);
-  randomTodos.push(...generateRandomIds(4));
-  savePlanIds(); //HERE
 }
 
 function showPage(pageCode) {
@@ -497,6 +495,8 @@ function startGeneration() {
 }
 
 btnGenerate.onclick = function () {
+  randomTodos.push(...generateRandomIds(4));
+  savePlanIds(); //HERE
   startGeneration();
 };
 
